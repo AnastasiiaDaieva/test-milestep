@@ -48,5 +48,8 @@
   "lint-staged": {
     "*.js": "eslint --cache --fix",
     "*.{js,css,md}": "prettier --write"
+  },
+  "engines": {
+    "node": "16.5"
   }
 }
