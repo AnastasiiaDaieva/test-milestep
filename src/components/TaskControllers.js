@@ -1,12 +1,27 @@
-import { MdDeleteOutline, MdDoneAll, MdDone, MdEditNote } from "react-icons/md";
+import { MdDeleteOutline, MdDone, MdEditNote } from "react-icons/md";
+import { Button } from "react-bootstrap";
+import s from "./TaskControllers.module.css";
+import { useState } from "react";
 
-function TaskControllers() {
+function TaskControllers({ showAdd }) {
   return (
-    <div>
+    <div className={s.TaskControllers}>
       {" "}
-      <MdEditNote />
-      edit <MdDone /> done <MdDeleteOutline />
-      delete
+      <Button>
+        <MdDone />
+      </Button>
+      {showAdd && (
+        <div className={s.TaskControllers__add}>
+          <Button className={s.TaskController}>
+            {" "}
+            <MdEditNote />
+          </Button>
+          <Button className={s.TaskController}>
+            {" "}
+            <MdDeleteOutline />
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

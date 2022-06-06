@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Spinner } from "react-bootstrap";
+import { Container, ListGroup, Spinner, Stack } from "react-bootstrap";
 import TaskCard from "components/TaskCard";
+import { MdDoneAll } from "react-icons/md";
+import AddTaskButton from "components/AddTaskButton";
+import SortingBar from "components/SortingBar";
+
 function HomePageView() {
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -20,21 +24,24 @@ function HomePageView() {
       {isLoading ? (
         <Spinner animation="border" role="status" />
       ) : (
-        <>
+        <Container>
           {" "}
-          {tasks.map(
-            ({ _id, name, description, priority, dueDate, isDone }) => (
-              <TaskCard
-                key={_id}
-                name={name}
-                description={description}
-                priority={priority}
-                dueDate={dueDate}
-                isDone={isDone}
-              />
-            )
-          )}
-        </>
+          <AddTaskButton /> <SortingBar /> <MdDoneAll />
+          <ListGroup gap={3}>
+            {tasks.map(
+              ({ _id, name, description, priority, dueDate, isDone }) => (
+                <TaskCard
+                  key={_id}
+                  name={name}
+                  description={description}
+                  priority={priority}
+                  dueDate={dueDate}
+                  isDone={isDone}
+                />
+              )
+            )}
+          </ListGroup>
+        </Container>
       )}
     </div>
   );
