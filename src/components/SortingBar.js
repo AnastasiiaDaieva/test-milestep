@@ -4,33 +4,25 @@ import {
   Dropdown,
   InputGroup,
   FormControl,
+  Input,
 } from "react-bootstrap";
 
-function SortingBar() {
-  const [sortTitle, setSortTitle] = useState("Sort by");
+function SortingBar({ sortTasks, sortingOptions, setSortOption, sortOption }) {
+  console.log("chosen", sortOption);
   return (
     <div>
       <InputGroup className="mb-3">
         <DropdownButton
           variant="outline-secondary"
-          title={sortTitle}
+          title={sortOption.label}
           id="input-group-dropdown-1"
+          as={Dropdown}
         >
-          <Dropdown.Item href="#" onClick={() => setSortTitle("Active first")}>
-            Active first
-          </Dropdown.Item>
-          <Dropdown.Item
-            href="#"
-            onClick={() => setSortTitle("Completed first")}
-          >
-            Completed first
-          </Dropdown.Item>
-          <Dropdown.Item href="#" onClick={() => setSortTitle(" Due date")}>
-            Due date
-          </Dropdown.Item>
-          <Dropdown.Item href="#" onClick={() => setSortTitle("Priority")}>
-            Priority
-          </Dropdown.Item>
+          {sortingOptions.map((option) => (
+            <Dropdown.Item href="#" onClick={() => setSortOption(option)}>
+              {option.label}{" "}
+            </Dropdown.Item>
+          ))}
         </DropdownButton>
       </InputGroup>
     </div>

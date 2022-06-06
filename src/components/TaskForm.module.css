@@ -1,0 +1,14 @@
+.TaskForm {
+  padding: 20px;
+}
+
+.TaskForm__entry {
+  width: 100%;
+}
+
+.TaskForm__datepicker {
+  all: unset;
+  width: 100%;
+  border: 1px solid rgb(212, 212, 212);
+  border-radius: 3px;
+}

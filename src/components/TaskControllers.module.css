@@ -1,6 +1,7 @@
 .TaskControllers {
   display: flex;
   justify-content: space-between;
+  margin-left: auto;
 }
 
 .TaskController:not(:last-child) {

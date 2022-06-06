@@ -1,0 +1,14 @@
+.HomePageView__list {
+  text-align: justify;
+  padding: 20px 30%;
+}
+.HomePageView__item {
+  padding: 15px 10px;
+  display: flex;
+  flex-direction: row;
+  text-align: justify;
+}
+.HomePageView__title {
+  width: 100%;
+  font-size: 25px;
+}

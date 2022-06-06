@@ -18,7 +18,7 @@ const SignupView = lazy(() =>
   import("views/SignupView" /*webpackChunkName: "signup-view" */)
 );
 
-axios.defaults.baseURL = `https://milestep-test-backend.herokuapp.com/api`;
+// axios.defaults.baseURL = `https://milestep-test-backend.herokuapp.com/api`;
 
 // import PublicRoute from "./PublicRoute";
 // import PrivateRoute from "./PrivateRoute";

@@ -1,6 +1,6 @@
 import { Button } from "react-bootstrap";
-function AddTaskButton() {
-  return <Button>Create task</Button>;
+function AddTaskButton({ setIsOpen }) {
+  return <Button onClick={() => setIsOpen(true)}>Create task</Button>;
 }
 
 export default AddTaskButton;

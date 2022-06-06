@@ -8,40 +8,25 @@ import {
   ListGroup,
 } from "react-bootstrap";
 import { useState } from "react";
+import s from "./TaskCard.module.css";
 
-function TaskCard({ name, description, priority, dueDate, isDone }) {
+function TaskCard({ name, description, priority, dueDate }) {
   const getDate = new Date(dueDate).toISOString().substring(0, 10);
   const convertedDate = getDate.split("-").reverse().join(".");
   const handleCheck = () => {};
-  const [showAdd, setShowAdd] = useState(false);
 
   return (
-    <ListGroup.Item>
-      <Card
-        border="primary"
-        style={{ width: "18rem" }}
-        onMouseEnter={() => setShowAdd(true)}
-        onMouseLeave={() => setShowAdd(false)}
-      >
+    <div className={s.TaskCard}>
+      <Card border="primary" style={{ width: "18rem" }}>
         {" "}
-        <Card.Header>
-          {name} due: {convertedDate}
-        </Card.Header>
+        <Card.Header className={s.TaskCard__heading}>{name}</Card.Header>
         <Card.Body>
           <Card.Title>{description}</Card.Title>{" "}
-          <Card.Text>{priority}</Card.Text>
-          <InputGroup className="mb-3">
-            <Form.Check
-              type="checkbox"
-              label="Mark done"
-              onClick={handleCheck}
-            />
-            {/* {isDone.toString()} */}
-          </InputGroup>
-          <TaskControllers showAdd={showAdd} />
+          <Card.Text>{priority}</Card.Text>{" "}
+          <Card.Text> Due: {convertedDate}</Card.Text>
         </Card.Body>{" "}
       </Card>{" "}
-    </ListGroup.Item>
+    </div>
   );
 }
 export default TaskCard;
