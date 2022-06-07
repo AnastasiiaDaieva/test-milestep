@@ -1,8 +1,7 @@
-import { Button, Form, Row, Col, Card } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { useForm, Controller } from "react-hook-form";
 import ReactDatePicker from "react-datepicker";
 import s from "./TaskForm.module.css";
-import { useState } from "react";
 import axios from "axios";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -58,7 +57,8 @@ function TaskForm({ closeModal, setTasks }) {
       isDone: isDone,
     };
     axios
-      .post("http://localhost:4000/api/tasks/", task)
+      // .post("http://localhost:4000/api/tasks/", task)
+      .post("/tasks/", task)
       .then(() => setTasks((prevTasks) => [...prevTasks, task]))
       .catch((error) => console.log(error));
     closeModal();

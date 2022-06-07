@@ -1,4 +1,4 @@
-import { MdDeleteOutline, MdDone, MdEditNote } from "react-icons/md";
+import { MdDeleteOutline, MdEditNote } from "react-icons/md";
 import { Button } from "react-bootstrap";
 import s from "./TaskControllers.module.css";
 import { useState } from "react";
@@ -11,12 +11,13 @@ function TaskControllers({ showAdd, id, setTasks }) {
   const deleteTask = () => {
     setIsLoading(true);
     axios
-      .delete(`http://localhost:4000/api/tasks/${id}`)
-      .then((res) => console.log(res))
+      // .delete(`http://localhost:4000/api/tasks/${id}`)
+      .delete(`/tasks/${id}`)
+      .then((res) => {
+        setTasks((prevTasks) => prevTasks.filter((item) => item._id !== id));
+      })
       .catch((error) => console.log(error))
       .finally(() => setIsLoading(false));
-
-    setTasks((prevTasks) => prevTasks.filter((item) => item._id !== id));
   };
 
   return (

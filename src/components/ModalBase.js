@@ -12,6 +12,7 @@ function ModalBase({
   setIsOpen,
   setShowCard,
   type,
+  id,
   name,
   description,
   priority,
@@ -65,12 +66,14 @@ function ModalBase({
           )}
           {type === "showtask" && (
             <TaskCard
+              id={id}
               name={name}
               description={description}
               priority={priority}
               dueDate={dueDate}
               isDone={isDone}
               closeModal={closeModal}
+              setTasks={setTasks}
             />
           )}
         </div>

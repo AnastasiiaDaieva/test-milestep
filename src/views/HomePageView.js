@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Container, ListGroup, Spinner, Stack, Card } from "react-bootstrap";
-import TaskCard from "components/TaskCard";
+import { Container, ListGroup, Spinner, Card } from "react-bootstrap";
 import { MdDoneAll } from "react-icons/md";
 import AddTaskButton from "components/AddTaskButton";
 import SortingBar from "components/SortingBar";
@@ -19,9 +18,9 @@ function HomePageView() {
     value: "default",
     label: "Sort by",
   });
-  console.log(sortOption);
+  // console.log(sortOption);
 
-  console.log(isOpen);
+  // console.log(isOpen);
   const sortingOptions = [
     { value: "active", label: "Active first" },
     { value: "completed", label: "Completed first" },
@@ -32,7 +31,6 @@ function HomePageView() {
   useEffect(() => {
     setTasks((prevTasks) =>
       [...prevTasks].sort((a, b) => {
-        // return prevTasks;
         if (sortOption.value === "active") {
           return a.isDone - b.isDone;
         } else if (sortOption.value === "completed") {
@@ -48,14 +46,14 @@ function HomePageView() {
     );
   }, [sortOption.value]);
 
-  console.log("sorted", tasks);
+  // console.log("sorted", tasks);
 
   console.log(tasks);
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get("http://localhost:4000/api/tasks/")
-      // .get("/tasks/")
+      // .get("http://localhost:4000/api/tasks/")
+      .get("/tasks/")
       .then((res) => setTasks(res.data))
       .catch((error) => console.log(error))
       .finally(() => setIsLoading(false));
@@ -84,19 +82,6 @@ function HomePageView() {
           />{" "}
           <MdDoneAll />
           <ListGroup gap={3} className={s.HomePageView__list}>
-            {/* {tasks.map(
-              ({ _id, name, description, priority, dueDate, isDone }) => (
-                <TaskCard
-                  key={_id}
-                  name={name}
-                  description={description}
-                  priority={priority}
-                  dueDate={dueDate}
-                  isDone={isDone}
-                />
-              )
-            )} */}
-
             {tasks !== undefined &&
               tasks.map(
                 ({
@@ -108,12 +93,15 @@ function HomePageView() {
                   isDone,
                 }) => (
                   <Card
+                    key={_id}
                     onMouseEnter={() => setShowAdd(true)}
                     onMouseLeave={() => setShowAdd(false)}
                     className={s.HomePageView__item}
+                    style={{ backgroundColor: isDone ? "grey" : "transparent" }}
                   >
                     {showCard && (
                       <ModalBase
+                        id={_id}
                         name={name}
                         description={description}
                         priority={label}
@@ -121,6 +109,7 @@ function HomePageView() {
                         isDone={isDone}
                         type="showtask"
                         setShowCard={setShowCard}
+                        setTasks={setTasks}
                       />
                     )}
                     <Card.Title

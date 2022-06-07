@@ -1,14 +1,8 @@
-import { useState } from "react";
-import {
-  DropdownButton,
-  Dropdown,
-  InputGroup,
-  FormControl,
-  Input,
-} from "react-bootstrap";
+import { DropdownButton, Dropdown, InputGroup } from "react-bootstrap";
+import { nanoid } from "nanoid";
 
 function SortingBar({ sortTasks, sortingOptions, setSortOption, sortOption }) {
-  console.log("chosen", sortOption);
+  // console.log("chosen", sortOption);
   return (
     <div>
       <InputGroup className="mb-3">
@@ -19,7 +13,11 @@ function SortingBar({ sortTasks, sortingOptions, setSortOption, sortOption }) {
           as={Dropdown}
         >
           {sortingOptions.map((option) => (
-            <Dropdown.Item href="#" onClick={() => setSortOption(option)}>
+            <Dropdown.Item
+              href="#"
+              onClick={() => setSortOption(option)}
+              key={nanoid()}
+            >
               {option.label}{" "}
             </Dropdown.Item>
           ))}

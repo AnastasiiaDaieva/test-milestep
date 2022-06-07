@@ -2,8 +2,9 @@ import s from "./App.module.scss";
 import LoginForm from "components/LoginForm";
 import { Container, Spinner } from "react-bootstrap";
 import SignupForm from "components/SignupForm";
-import { Suspense, lazy, useEffect } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import axios from "axios";
+import { GeneralAccess, RequireAuth } from "helpers/checkRoutes";
 
 import { Routes, Route } from "react-router-dom";
 import Header from "components/Header";
@@ -18,12 +19,19 @@ const SignupView = lazy(() =>
   import("views/SignupView" /*webpackChunkName: "signup-view" */)
 );
 
-// axios.defaults.baseURL = `https://milestep-test-backend.herokuapp.com/api`;
-
-// import PublicRoute from "./PublicRoute";
-// import PrivateRoute from "./PrivateRoute";
+axios.defaults.baseURL = `https://milestep-test-backend.herokuapp.com/api`;
 
 function App() {
+  const [currentUser, setCurrentUser] = useState("");
+  useEffect(() => {
+    const checkToken = window.localStorage.getItem("token");
+
+    if (checkToken) {
+      const foundUser = JSON.parse(checkToken);
+      setCurrentUser(foundUser);
+    }
+  }, []);
+
   return (
     <>
       <Header />
@@ -35,23 +43,29 @@ function App() {
         }
       >
         <Routes>
-          <Route path="/*" element={<HomePageView />} />
+          <Route
+            path="/*"
+            element={
+              <RequireAuth redirectTo="/login" user={currentUser}>
+                <HomePageView />
+              </RequireAuth>
+            }
+          />
 
           <Route
             path="/signup"
             element={
-              // <GeneralAccess redirectTo="/">
-
-              <SignupView />
-              // </GeneralAccess>
+              <GeneralAccess redirectTo="/*" user={currentUser}>
+                <SignupView />
+              </GeneralAccess>
             }
           />
           <Route
             path="/login"
             element={
-              // <GeneralAccess redirectTo="/">
-              <SigninView />
-              // </GeneralAccess>
+              <GeneralAccess redirectTo="/*" user={currentUser}>
+                <SigninView />
+              </GeneralAccess>
             }
           />
         </Routes>
